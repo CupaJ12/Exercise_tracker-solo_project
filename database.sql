@@ -8,3 +8,10 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL
 );
+
+-- table for exercises: rows: id, name, user_id
+CREATE TABLE "exercise" (
+    "id" SERIAL PRIMARY KEY,
+    "name" VARCHAR (80) NOT NULL,
+    "user_id" INTEGER REFERENCES "user" ("id")
+);
