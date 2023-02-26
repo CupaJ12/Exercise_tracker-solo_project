@@ -21,7 +21,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 // my imports:
 import InputPage from '../InputPage/InputPage';
-
+import CelebrationPage from '../CelebrationPage/CelebrationPage';
+import LogHistoryPage from '../LogHistoryPage/LogHistoryPage';
 
 
 
@@ -60,6 +61,27 @@ function App() {
           >
             <InputPage />
           </Route>
+          {/* celebration page */}
+          <Route
+          exact
+          path="/CelebrationPage"
+          >
+            <CelebrationPage />
+          </Route>
+          {/* log history page */}
+          <Route
+          exact
+          path="/LogHistoryPage"
+          >
+            <LogHistoryPage />
+          </Route>
+          {/* end just for now */}
+
+
+
+
+
+
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).

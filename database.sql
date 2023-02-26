@@ -15,3 +15,11 @@ CREATE TABLE "exercise" (
     "name" VARCHAR (80) NOT NULL,
     "user_id" INTEGER REFERENCES "user" ("id")
 );
+-- table for exercise logs rows: id, user_id, exercise_id, date, reps
+CREATE TABLE "log"(
+	"id" serial primary key,
+	"user_id" int references "user".id,
+	"exercise_id" int references "exercise".id,
+	"date" date default current_timestamp,
+	"reps" int
+);

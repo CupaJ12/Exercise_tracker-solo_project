@@ -4,13 +4,12 @@ import './InputPage.css';
 
 function InputPage() {
 	// declare constants, import reducers etc.
- let date = new Date();
 	return (
-		<main>
+		<main class='flex-container'>
 			<div>
 				<h1>Input Page</h1>
 			</div>
-			<div>
+			<div className='flex-child checklist'>
 				<h2>Checklist</h2>
 				<ul>
 					<li>Exercise 1</li>
@@ -20,26 +19,26 @@ function InputPage() {
 					<li>Exercise 5</li>
 				</ul>
 			</div>
-			<div>
+			<div className='flex-child inputs'>
 				<h2>Number Inputs</h2>
 				<form>
 					<label>Exercise 1</label>
-					<input type='number' name='exercise1' />
+					<input type='number' className='exercise1' />
 					<label>Exercise 2</label>
-					<input type='number' name='exercise2' />
+					<input type='number' className='exercise2' />
 					<label>Exercise 3</label>
-					<input type='number' name='exercise3' />
+					<input type='number' className='exercise3' />
 					<label>Exercise 4</label>
-					<input type='number' name='exercise4' />
+					<input type='number' className='exercise4' />
 					<label>Exercise 5</label>
-					<input type='number' name='exercise5' />
+					<input type='number' className='exercise5' />
 				</form>
 			</div>
 			<div>
 				<h2>Date Input</h2>
 				<form>
 					<label>Date</label>
-					<input type='date' name='date' default= {date} />
+					<input type='date' className='date' />
 				</form>
 			</div>
 			<div>
