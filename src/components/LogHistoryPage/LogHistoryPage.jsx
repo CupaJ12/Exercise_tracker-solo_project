@@ -4,9 +4,20 @@ import './LogHistoryPage.css';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 function LogHistory() {
     // declare constants, import reducers etc.
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const handleClick = () => {
+        history.push('/InputPage');
+    }
+ useEffect(() => {
+        dispatch({ type: 'FETCH_EXERCISES' });
+    }, []);
+
+
     return (
         <main>
             <div>
@@ -43,7 +54,7 @@ function LogHistory() {
                 <button>More</button>
             </div>
             <div>
-                <button>Add new exercise</button>
+                <button onClick={handleClick()}>Add new exercise</button>
             </div>
         </main>
     );

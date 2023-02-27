@@ -7,9 +7,30 @@ import { useSelector } from 'react-redux';
 
 function InputPage() {
 	// declare constants, import reducers etc.
+    const dispatch = useDispatch();
     let currentDate = new Date();
+    console.log(currentDate);
+    const history = useHistory();
+    const handleClick = () => {
+        history.push('/LogHistoryPage');
+    }
+    const handleSubmit = () => {
+        history.push('/CelebrationPage');
+        dispatch ({
+            type: 'INPUT_EXERCISE',
+            payload: {
+                // exercise1: exercise1,
+                // exercise2: exercise2,
+                // exercise3: exercise3,
+                // exercise4: exercise4,
+                // exercise5: exercise5,
+                // date: date
+            }
+        })
+    }
+
 	return (
-		<main class='flex-container'>
+		<main className='flex-container'>
 			<div>
 				<h1>Input Page</h1>
 			</div>
@@ -47,8 +68,8 @@ function InputPage() {
 				</form>
 			</div>
 			<div>
-				<button>Previous Logs</button>
-				<button>Submit</button>
+				<button onClick={handleClick()}>Previous Logs</button>
+				<button onClick={handleSubmit()}>Submit</button>
 			</div>
 		</main>
 	);
