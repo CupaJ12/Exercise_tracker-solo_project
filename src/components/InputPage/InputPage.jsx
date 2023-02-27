@@ -1,9 +1,13 @@
 // this page will contain a checklist for every exercise completed, a series of number inputs, a date input that defaults to current date, a button that takes you to the previous log page, and a submit button that takes you to the celebration page.
 import React from 'react';
 import './InputPage.css';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function InputPage() {
 	// declare constants, import reducers etc.
+    let currentDate = new Date();
 	return (
 		<main class='flex-container'>
 			<div>
@@ -38,7 +42,8 @@ function InputPage() {
 				<h2>Date Input</h2>
 				<form>
 					<label>Date</label>
-					<input type='date' className='date' />
+					<input type='date' className='date' placeholder= {currentDate} />
+                    {/* maybe onfocus, get date on focus */}
 				</form>
 			</div>
 			<div>
