@@ -68,18 +68,6 @@ function InputPage() {
 			</div>
 			<div className='flex-child checklist'>
 				<h2>Checklist</h2>
-				<ul>
-					<li>Exercise 1</li>
-					<li>Exercise 2</li>
-					<li>Exercise 3</li>
-					<li>Exercise 4</li>
-					<li>Exercise 5</li>
-				</ul>
-			</div>
-			<div className='flex-child inputs'>
-				<h2>Number Inputs</h2>
-				{/* new way of displaying exercises below: */}
-				{/* checklist below */}
 				{listData.map((item, index) => {
 					return (
 						<div key={item.id} className='checkbox-container'>
@@ -93,29 +81,33 @@ function InputPage() {
 						</div>
 					);
 				})}
-
+			</div>
+			<div className='flex-child inputs'>
+				
 			
 				
 
-				;{/* old way of displaying exercises below: */}
-				{/* <label>Exercise 1</label>
+				{/* old way of displaying exercises below: */}
+				<label>Exercise 1</label>
 					<input type='number' className='exercise1' />
+					<br></br>
 					<label>Exercise 2</label>
 					<input type='number' className='exercise2' />
+					<br></br>
 					<label>Exercise 3</label>
 					<input type='number' className='exercise3' />
+					<br></br>
 					<label>Exercise 4</label>
 					<input type='number' className='exercise4' />
+					<br></br>
 					<label>Exercise 5</label>
-					<input type='number' className='exercise5' /> */}
+					<input type='number' className='exercise5' />
+					<br></br>
 				<label>Date</label>
 				<input type='date' className='date' />
 				<button type='submit' onClick={() => handleSubmitTwo()}>
 					Previous Logs
 				</button>
-			</div>
-			<div>
-				<h2>Date Input</h2>
 			</div>
 			<div>
 				<button onClick={() => handleSubmit()}>Submit</button>
