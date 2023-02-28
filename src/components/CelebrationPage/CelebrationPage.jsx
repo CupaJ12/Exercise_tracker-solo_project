@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 function CelebrationPage() {
     // declare constants, import reducers etc.
+    const dispatch = useDispatch();
     const history = useHistory();
     const handleClick = () => {
         history.push('/LogHistoryPage');
@@ -19,7 +20,7 @@ function CelebrationPage() {
                 <h2>You've completed X out of X workouts!</h2>
             </div>
             <div>
-                <button onClick={handleClick()}>Log history</button>
+                <button onClick={() => handleClick()}>Log history</button>
             </div>
         </main>
     );

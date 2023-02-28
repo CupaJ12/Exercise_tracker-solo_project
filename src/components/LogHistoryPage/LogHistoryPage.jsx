@@ -24,9 +24,6 @@ function LogHistory() {
                 <h1>Log History</h1>
             </div>
             <div>
-                <button>Logout</button>
-            </div>
-            <div>
                 <table>
                     <tr>
                         <th>Date</th>
@@ -54,7 +51,7 @@ function LogHistory() {
                 <button>More</button>
             </div>
             <div>
-                <button onClick={handleClick()}>Add new exercise</button>
+                <button onClick={() => handleClick()}>Add new exercise</button>
             </div>
         </main>
     );

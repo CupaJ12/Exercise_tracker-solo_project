@@ -4,15 +4,23 @@ import './InputPage.css';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 function InputPage() {
 	// declare constants, import reducers etc.
     const dispatch = useDispatch();
-    let currentDate = new Date();
-    console.log(currentDate);
+    
+    // let currentDate = new Date();
+    // console.log(currentDate);
+    // let date = currentDate.getDate();
     const history = useHistory();
-    const handleClick = () => {
-        history.push('/LogHistoryPage');
+
+    // const handleClick = () => {
+        // history.push('/LogHistory');
+    // }
+    const handleSubmitTwo = () => {
+        history.push('/LogHistory');
     }
     const handleSubmit = () => {
         history.push('/CelebrationPage');
@@ -46,8 +54,15 @@ function InputPage() {
 			</div>
 			<div className='flex-child inputs'>
 				<h2>Number Inputs</h2>
-				<form>
-					<label>Exercise 1</label>
+                {/* new way of displaying exercises below: */}
+                {/* checklist below */}
+                
+
+
+
+
+				{/* old way of displaying exercises below: */}
+					{/* <label>Exercise 1</label>
 					<input type='number' className='exercise1' />
 					<label>Exercise 2</label>
 					<input type='number' className='exercise2' />
@@ -56,20 +71,23 @@ function InputPage() {
 					<label>Exercise 4</label>
 					<input type='number' className='exercise4' />
 					<label>Exercise 5</label>
-					<input type='number' className='exercise5' />
-				</form>
+					<input type='number' className='exercise5' /> */}
+
+
+
+
+
+
+					<label>Date</label>
+					<input type='date' className='date'  />
+				<button type="submit" onClick={() => handleSubmitTwo()} >Previous Logs</button>
+				
 			</div>
 			<div>
 				<h2>Date Input</h2>
-				<form>
-					<label>Date</label>
-					<input type='date' className='date' placeholder= {currentDate} />
-                    {/* maybe onfocus, get date on focus */}
-				</form>
 			</div>
 			<div>
-				<button onClick={handleClick()}>Previous Logs</button>
-				<button onClick={handleSubmit()}>Submit</button>
+				<button onClick={() => handleSubmit()}>Submit</button>
 			</div>
 		</main>
 	);

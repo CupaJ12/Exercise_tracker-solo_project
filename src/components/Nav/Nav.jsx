@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import InputPage from '../InputPage/InputPage';
+import LogHistoryPage from '../LogHistoryPage/LogHistoryPage';
+
 
 function Nav() {
   const user = useSelector((store) => store.user);
-
   return (
     <div className="nav">
       <Link to="/home">
@@ -30,6 +32,14 @@ function Nav() {
 
             <Link className="navLink" to="/info">
               Info Page
+            </Link>
+
+            <Link className="navLink" to="/InputPage">
+              Input Page
+            </Link>
+            
+            <Link className="navLink" to="/LogHistoryPage">
+              Log History Page
             </Link>
 
             <LogOutButton className="navLink" />
