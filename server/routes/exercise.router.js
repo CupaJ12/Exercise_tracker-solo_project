@@ -3,10 +3,8 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	console.log(req.body);
-	res.sendStatus(200);
 	let queryText = `SELECT * FROM "exercise"
-  where "user"."id" = $1;`;
+  where "user_id" = $1;`;
 	pool
 		.query(queryText, [req.user.id])
 		.then((result) => {
@@ -18,5 +16,21 @@ router.get('/', (req, res) => {
 			res.sendStatus(500);
 		});
 });
+
+// delete Route for specific exercise clicked from database, connected to delete button and delete saga
+router.delete('/:id', (req, res) => {
+	let queryText = `DELETE FROM "exercise" WHERE "id" = $1;`;
+	pool
+		.query(queryText, [req.params.id])
+		.then((result) => {
+			res.sendStatus(200);
+		})
+		.catch((error) => {
+			console.log('Error completing DELETE exercise query', error);
+			res.sendStatus(500);
+		});
+});
+
+
 
 module.exports = router;

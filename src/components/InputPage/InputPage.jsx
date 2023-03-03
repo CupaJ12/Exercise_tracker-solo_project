@@ -8,6 +8,14 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 function InputPage() {
+	const getExercisesReducer = useSelector(
+		(store) => store.exerciseReducer
+	);
+
+	useEffect(() => {
+		dispatch({ type: 'FETCH_EXERCISES' });
+	}, [dispatch]);
+	console.log(getExercisesReducer);
 	// declare constants, import reducers etc.
 	const dispatch = useDispatch();
 	// handle select for the checklist
@@ -26,8 +34,9 @@ function InputPage() {
 	};
 
 	const [checkedList, setCheckedList] = useState([]);
+
 	const listData = [
-		{ id: '1', value: 'exercise1' },
+		{ getExercisesReducer },
 		{ id: '2', value: 'exercise2' },
 		{ id: '3', value: 'exercise3' },
 		{ id: '4', value: 'exercise4' },
@@ -61,14 +70,15 @@ function InputPage() {
 		});
 	};
 
+	// access the data from the reducer
+	// map through the data and display it in the checklist
+
 	return (
 		<main className='flex-container'>
-			<div>
-				<h1>Input Page</h1>
-			</div>
 			<div className='flex-child checklist'>
 				<h2>Checklist</h2>
-				{listData.map((item, index) => {
+				{/* mapping through the exercises retrieved from the reducer */}
+				{getExercisesReducer.map((item, index) => {
 					return (
 						<div key={item.id} className='checkbox-container'>
 							<input
@@ -77,32 +87,23 @@ function InputPage() {
 								value={item.value}
 								onChange={handleSelect}
 							/>
-							<label>{item.value}</label>
+							<label>{item.name}</label>
 						</div>
 					);
 				})}
 			</div>
 			<div className='flex-child inputs'>
-				
-			
-				
+				{/* map through the exercise number inputs the same way i mapped through the above */}
 
-				{/* old way of displaying exercises below: */}
-				<label>Exercise 1</label>
-					<input type='number' className='exercise1' />
-					<br></br>
-					<label>Exercise 2</label>
-					<input type='number' className='exercise2' />
-					<br></br>
-					<label>Exercise 3</label>
-					<input type='number' className='exercise3' />
-					<br></br>
-					<label>Exercise 4</label>
-					<input type='number' className='exercise4' />
-					<br></br>
-					<label>Exercise 5</label>
-					<input type='number' className='exercise5' />
-					<br></br>
+				{getExercisesReducer.map((item, index) => {
+					return (
+						<div key={item.id} className='numInput-container'>
+							<label>{item.name}</label>
+							<input type='number' className={item.value} />
+							<br></br>
+						</div>
+					);
+				})}
 				<label>Date</label>
 				<input type='date' className='date' />
 				<button type='submit' onClick={() => handleSubmitTwo()}>
@@ -117,3 +118,23 @@ function InputPage() {
 }
 
 export default InputPage;
+
+// {/* <section className=“movieDetails”>
+//                 <h3>Genres:</h3>
+//             {/* Map through genres to be rendered on the DOM */}
+//                 {genres.map((genre, i) => (
+//                     <h3 key={i}>{genre.name}</h3>
+//                 ))}
+//                 {movies.map((movie) => {
+//                     return (
+//                         <div key={movie.id} >
+//                             <section className=‘details’>
+//                                 <h3>{movie.title}</h3>
+//                                 <img src={movie.poster} alt={movie.title}/>
+//                                 <h4>{movie.description}</h4>
+//                             </section>
+//                             <SubmitButton />
+//                         </div>
+//                     );
+//                 })}
+//             </section> */}
