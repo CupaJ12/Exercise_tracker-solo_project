@@ -8,12 +8,17 @@ import { useEffect } from 'react';
 
 function LogHistory() {
 	// declare constants, import reducers etc.
-
+    // logArray is the array of objects that contains all the exercise logs for the user
+    const logArray = useSelector((store) => store.exerciseLogReducer);
+    // 
 	const dispatch = useDispatch();
+    // 
 	const history = useHistory();
+    // 
 	const handleClick = () => {
 		history.push('/InputPage');
 	};
+    // 
 	useEffect(() => {
 		dispatch({ type: 'FETCH_EXERCISE_LOG' });
 	}, []);
