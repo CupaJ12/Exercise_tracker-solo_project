@@ -8,31 +8,40 @@ import { useEffect } from 'react';
 
 function LogHistory() {
 	// declare constants, import reducers etc.
-    // logArray is the array of objects that contains all the exercise logs for the user
-    const logArray = useSelector((store) => store.exerciseLogReducer);
-    // 
+	//
+	// logArray is the array of objects that contains all the exercise logs for the user
+	const logArray = useSelector((store) => store.exerciseLogReducer);
+	//
+	// import exerciseReducer to get the exercise names
+	const exerciseReducer = useSelector((store) => store.exerciseReducer);
+	//
+	console.log(logArray, 'logArray');
 	const dispatch = useDispatch();
-    // 
+	//
 	const history = useHistory();
-    // 
+	//
 	const handleClick = () => {
 		history.push('/InputPage');
 	};
-    // 
+	//
 	useEffect(() => {
 		dispatch({ type: 'FETCH_EXERCISE_LOG' });
 	}, []);
 	// function to run on click of the delete button
-	const handleDelete = () => {
-		dispatch({ type: 'DELETE_EXERCISE' });
+	const handleDelete = (logArray) => {
+		dispatch({ type: 'DELETE_EXERCISE', payload: log.id });
 	};
-    // function to run on click of the edit button, prepopulates the input page with the already inputted info stored in the database
+	// function to run on click of the edit button, prepopulates the input page with the already inputted info stored in the database
 
-    // const handleEdit = () => {
-    //     dispatch({ type: 'EDIT_EXERCISE' });
-    // }
-
-
+	const handleEdit = () => {
+		// dispatch({ type: 'EDIT_EXERCISE' });
+		console.log('edit button clicked');
+	};
+	// useEffect to get the exercise names from db on page load
+	useEffect(() => {
+		dispatch({ type: 'FETCH_EXERCISES' });
+	}, []);
+	//
 
 	return (
 		<main>
@@ -40,32 +49,33 @@ function LogHistory() {
 				<h1>Log History</h1>
 			</div>
 			<div>
+				<h3></h3>
 				<table>
 					<tr>
 						<th>Date</th>
-						<th>Exercise 1</th>
-						<th>Exercise 2</th>
-						<th>Exercise 3</th>
-						<th>Exercise 4</th>
-						<th>Exercise 5</th>
+						{exerciseReducer.map((exercise) => {
+							return <th>{exercise.name}</th>;
+						})}
+
 						<th>Edit</th>
 						<th>Delete</th>
 					</tr>
-					<tr>
-						<td>date</td>
-						<td>exercise1</td>
-						<td>exercise2</td>
-						<td>exercise3</td>
-						<td>exercise4</td>
-						<td>exercise5</td>
-						<td>
-							<button onClick={() => handleEdit()}
-                            >Edit</button>
-						</td>
-						<td>
-							<button onClick={() => handleDelete()}>Delete</button>
-						</td>
-					</tr>
+
+					{/* grab rep count from the log table which is stored in the exerciseLog reducer imported as logArray*/}
+					{logArray.map((log) => {
+						return (
+							<tr>
+								<td>{log.date}</td>
+								<td>{log.reps}</td>
+								<td>
+									<button onClick={() => handleEdit()}>Edit</button>
+								</td>
+								<td>
+									<button onClick={() => handleDelete(log.id)}>Delete</button>
+								</td>
+							</tr>
+						);
+					})}
 				</table>
 			</div>
 			<div>

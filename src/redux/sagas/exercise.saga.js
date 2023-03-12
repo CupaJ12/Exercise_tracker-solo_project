@@ -15,7 +15,7 @@ function* fetchExercises() {
 // fetches exercise log history from the database on page load for logHistoryPage component
 function* fetchExerciseLog() {
     try {
-        const response = yield axios.get('/api/exercise');
+        const response = yield axios.get('/api/exercise/logHistory');
         yield put({ type: 'SET_EXERCISE_LOG', payload: response.data });
     } catch (error) {
         console.log('Error with fetch exercise log:', error);
@@ -35,12 +35,14 @@ function* inputExercise(action) {
 
 // deletes the specific exercise from the database when the delete button associated with it is clicked
 function* deleteExercise(action) {
+    console.log(action.payload)
     try {
         yield axios.delete(`/api/exercise/${action.payload}`);
         yield put({ type: 'FETCH_EXERCISES' });
     } catch (error) {
         console.log('Error with delete exercise:', error);
     }
+    
 }
 
 

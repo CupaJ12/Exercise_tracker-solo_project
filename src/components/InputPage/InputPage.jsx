@@ -14,7 +14,7 @@ function InputPage() {
 
 	useEffect(() => {
 		dispatch({ type: 'FETCH_EXERCISES' });
-	}, [dispatch]);
+	}, []);
 	console.log(getExercisesReducer);
 	// declare constants, import reducers etc.
 	const dispatch = useDispatch();
