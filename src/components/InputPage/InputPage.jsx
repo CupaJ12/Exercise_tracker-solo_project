@@ -8,10 +8,11 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 function InputPage() {
-	const getExercisesReducer = useSelector(
-		(store) => store.exerciseReducer
-	);
-
+	const getExercisesReducer = useSelector((store) => store.exerciseReducer);
+	const [pushups, setPushups] = useState(0);
+	const [situps, setSitups] = useState(0);
+	const [planks, setPlanks] = useState(0);
+	
 	useEffect(() => {
 		dispatch({ type: 'FETCH_EXERCISES' });
 	}, []);
@@ -19,30 +20,30 @@ function InputPage() {
 	// declare constants, import reducers etc.
 	const dispatch = useDispatch();
 	// handle select for the checklist
-	const handleSelect = (event) => {
-		const value = event.target.value;
-		const isChecked = event.target.checked;
+	// const handleSelect = (event) => {
+	// 	const value = event.target.value;
+	// 	const isChecked = event.target.checked;
 
-		if (isChecked) {
-			//Add checked item into checkList
-			setCheckedList([...checkedList, value]);
-		} else {
-			//Remove unchecked item from checkList
-			const filteredList = checkedList.filter((item) => item !== value);
-			setCheckedList(filteredList);
-		}
-	};
+	// 	if (isChecked) {
+	// 		//Add checked item into checkList
+	// 		setCheckedList([...checkedList, value]);
+	// 	} else {
+	// 		//Remove unchecked item from checkList
+	// 		const filteredList = checkedList.filter((item) => item !== value);
+	// 		setCheckedList(filteredList);
+	// 	}
+	// };
 
-	const [checkedList, setCheckedList] = useState([]);
+	// const [checkedList, setCheckedList] = useState([]);
 
-	const listData = [
-		{ getExercisesReducer },
-		{ id: '2', value: 'exercise2' },
-		{ id: '3', value: 'exercise3' },
-		{ id: '4', value: 'exercise4' },
-		{ id: '5', value: 'exercise5' },
-		{ id: '6', value: 'exercise6' },
-	];
+	// const listData = [
+	// 	{ getExercisesReducer },
+	// 	{ id: '2', value: 'exercise2' },
+	// 	{ id: '3', value: 'exercise3' },
+	// 	{ id: '4', value: 'exercise4' },
+	// 	{ id: '5', value: 'exercise5' },
+	// 	{ id: '6', value: 'exercise6' },
+	// ];
 
 	// let currentDate = new Date();
 	// console.log(currentDate);
@@ -56,18 +57,17 @@ function InputPage() {
 		history.push('/LogHistory');
 	};
 	const handleSubmit = () => {
-		history.push('/CelebrationPage');
 		dispatch({
 			type: 'INPUT_EXERCISE',
 			payload: {
-				// exercise1: exercise1,
-				// exercise2: exercise2,
-				// exercise3: exercise3,
-				// exercise4: exercise4,
-				// exercise5: exercise5,
-				// date: date
+				date: '1111-01-01',
+				exercise_id: 1,
+				user_id:1,
+				reps: 10
+
 			},
 		});
+		history.push('/CelebrationPage');
 	};
 
 	// access the data from the reducer
@@ -75,23 +75,7 @@ function InputPage() {
 
 	return (
 		<main className='flex-container'>
-			<div className='flex-child checklist'>
-				<h2>Checklist</h2>
-				{/* mapping through the exercises retrieved from the reducer */}
-				{getExercisesReducer.map((item, index) => {
-					return (
-						<div key={item.id} className='checkbox-container'>
-							<input
-								type='checkbox'
-								name='exercises'
-								value={item.value}
-								onChange={handleSelect}
-							/>
-							<label>{item.name}</label>
-						</div>
-					);
-				})}
-			</div>
+			
 			<div className='flex-child inputs'>
 				{/* map through the exercise number inputs the same way i mapped through the above */}
 
@@ -99,7 +83,7 @@ function InputPage() {
 					return (
 						<div key={item.id} className='numInput-container'>
 							<label>{item.name}</label>
-							<input type='number' className={item.value} />
+							<input type='number' className={item.value}  onChange ={(e) => setPushups(e.target.value)} />
 							<br></br>
 						</div>
 					);
@@ -138,3 +122,4 @@ export default InputPage;
 //                     );
 //                 })}
 //             </section> */}
+

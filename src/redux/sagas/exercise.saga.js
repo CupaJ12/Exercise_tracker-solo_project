@@ -16,6 +16,7 @@ function* fetchExercises() {
 function* fetchExerciseLog() {
     try {
         const response = yield axios.get('/api/exercise/logHistory');
+        console.table("get all:", response.data);
         yield put({ type: 'SET_EXERCISE_LOG', payload: response.data });
     } catch (error) {
         console.log('Error with fetch exercise log:', error);
@@ -25,9 +26,9 @@ function* fetchExerciseLog() {
 
 // takes exercise input from the inputPage and posts it to the database
 function* inputExercise(action) {
+    console.log('action.payload:', action.payload);
     try {
         yield axios.post('/api/exercise', action.payload);
-        yield put({ type: 'INPUT_EXERCISE' });
     } catch (error) {
         console.log('Error with input exercise:', error);
     }
@@ -35,23 +36,40 @@ function* inputExercise(action) {
 
 // deletes the specific exercise from the database when the delete button associated with it is clicked
 function* deleteExercise(action) {
-    console.log(action.payload)
+    console.log('action.payload:', action.payload.id)
     try {
-        yield axios.delete(`/api/exercise/${action.payload}`);
-        yield put({ type: 'FETCH_EXERCISES' });
+        yield axios.delete(`/api/exercise/${action.payload.id}`);
+        yield put({ type: 'FETCH_EXERCISE_LOG' });
     } catch (error) {
         console.log('Error with delete exercise:', error);
     }
     
 }
 
+// handles the update of a specific exercise log in the database when the edit button is clicked
+
+// test this one, havent tested
+// also need to connect this to the edit button on the logHistoryPage, and the submit button on the inputPage.
+
+// function* editExercise(action) {
+//     try {
+//         yield axios.put(`/api/exercise/${action.payload.id}`, action.payload);
+//         yield put({ type: 'FETCH_EXERCISE_LOG' });
+//     } catch (error) {
+//         console.log('Error with edit exercise:', error);
+//     }
+// }
+
+
+
 
 
 function* exerciseSaga() {
     yield takeLatest('FETCH_EXERCISES', fetchExercises);
     yield takeLatest('INPUT_EXERCISE', inputExercise);
-    yield takeLatest('DELETE_EXERCISE', deleteExercise);
+    yield takeLatest('DELETE_EXERCISE_LOG', deleteExercise);
     yield takeLatest('FETCH_EXERCISE_LOG', fetchExerciseLog);
+    // yield takeLatest('EDIT_EXERCISE_LOG', editExercise);
 }
 
 export default exerciseSaga;

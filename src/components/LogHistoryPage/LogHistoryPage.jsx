@@ -28,8 +28,8 @@ function LogHistory() {
 		dispatch({ type: 'FETCH_EXERCISE_LOG' });
 	}, []);
 	// function to run on click of the delete button
-	const handleDelete = (logArray) => {
-		dispatch({ type: 'DELETE_EXERCISE', payload: log.id });
+	const handleDelete = (log) => {
+		dispatch({ type: 'DELETE_EXERCISE_LOG', payload: {id: log.id} });
 	};
 	// function to run on click of the edit button, prepopulates the input page with the already inputted info stored in the database
 
@@ -71,7 +71,7 @@ function LogHistory() {
 									<button onClick={() => handleEdit()}>Edit</button>
 								</td>
 								<td>
-									<button onClick={() => handleDelete(log.id)}>Delete</button>
+									<button onClick={() => handleDelete(log)}>Delete</button>
 								</td>
 							</tr>
 						);
