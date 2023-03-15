@@ -12,84 +12,101 @@ function InputPage() {
 	const [pushups, setPushups] = useState(0);
 	const [situps, setSitups] = useState(0);
 	const [planks, setPlanks] = useState(0);
-	
+	const [date, setDate] = useState('');
+
 	useEffect(() => {
-		dispatch({ type: 'FETCH_EXERCISES' });
+		// TODO: Reference movie saga example for edit
+		// dispatch({ type: 'FETCH_EXERCISES' });
+		//dispatch to do a get request by date, return an array of 3 exercise logs, use those to prepopulate the input fields
 	}, []);
-	console.log(getExercisesReducer);
+
+	
 	// declare constants, import reducers etc.
 	const dispatch = useDispatch();
-	// handle select for the checklist
-	// const handleSelect = (event) => {
-	// 	const value = event.target.value;
-	// 	const isChecked = event.target.checked;
-
-	// 	if (isChecked) {
-	// 		//Add checked item into checkList
-	// 		setCheckedList([...checkedList, value]);
-	// 	} else {
-	// 		//Remove unchecked item from checkList
-	// 		const filteredList = checkedList.filter((item) => item !== value);
-	// 		setCheckedList(filteredList);
-	// 	}
-	// };
-
-	// const [checkedList, setCheckedList] = useState([]);
-
-	// const listData = [
-	// 	{ getExercisesReducer },
-	// 	{ id: '2', value: 'exercise2' },
-	// 	{ id: '3', value: 'exercise3' },
-	// 	{ id: '4', value: 'exercise4' },
-	// 	{ id: '5', value: 'exercise5' },
-	// 	{ id: '6', value: 'exercise6' },
-	// ];
-
-	// let currentDate = new Date();
-	// console.log(currentDate);
-	// let date = currentDate.getDate();
 	const history = useHistory();
 
-	// const handleClick = () => {
-	// history.push('/LogHistory');
-	// }
 	const handleSubmitTwo = () => {
 		history.push('/LogHistory');
 	};
-	const handleSubmit = () => {
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const exerciseLog = {
+			pushupReps: pushups,
+			situpReps: situps,
+			plankReps: planks,
+			date,
+		}
 		dispatch({
 			type: 'INPUT_EXERCISE',
-			payload: {
-				date: '1111-01-01',
-				exercise_id: 1,
-				user_id:1,
-				reps: 10
-
-			},
+			payload: exerciseLog,
 		});
+	
 		history.push('/CelebrationPage');
 	};
 
-	// access the data from the reducer
-	// map through the data and display it in the checklist
-
 	return (
 		<main className='flex-container'>
-			
 			<div className='flex-child inputs'>
 				{/* map through the exercise number inputs the same way i mapped through the above */}
-
-				{getExercisesReducer.map((item, index) => {
+				<form onSubmit={handleSubmit}>
+				{/* pushups */}
+				<div className='numInput-container'>
+								<label>pushups</label>
+								<input
+									type='number'
+									className='pushups'
+									onChange={(e) => setPushups(e.target.value)}
+								/>
+								<br></br>
+							</div>
+							{/* situps */}
+							<div className='numInput-container'>
+								<label>situps</label>
+								<input
+									type='number'
+									className='situps'
+									onChange={(e) => setSitups(e.target.value)}
+								/>
+								<br></br>
+							</div>
+							{/* planks */}
+							<div  className='numInput-container'>
+								<label>planks</label>
+								<input
+									type='number'
+									className='planks'
+									onChange={(e) => setPlanks(e.target.value)}
+								/>
+								<br></br>
+							</div>
+							<button type='submit' >Submit!</button>
+							</form>
+				{/* {getExercisesReducer.map((item, index) => {
 					return (
-						<div key={item.id} className='numInput-container'>
-							<label>{item.name}</label>
-							<input type='number' className={item.value}  onChange ={(e) => setPushups(e.target.value)} />
-							<br></br>
-						</div>
+						<form onSubmit={(e) => formSubmit()}>
+							<select name='exercise' id='exercise' 
+							onChange={(e) => selectHandler(e.target.value) }>
+								<option value='pushups'>Pushups</option>
+								<option value='situps'>Situps</option>
+								<option value='planks'>Planks</option>
+							</select>
+						
+							<div key={item.id} className='numInput-container'>
+								<label>{item.name}</label>
+								<input
+									type='number'
+									className={item.value}
+									onChange={(e) => setPushups(e.target.value)}
+								/>
+								<br></br>
+							</div>
+						</form>
 					);
-				})}
+				})} */}
+
 				<label>Date</label>
-				<input type='date' className='date' />
+				<input type='date' className='date' onChange= {(e) => setDate(e.target.value)}/>
+				{/* make type date^ */}
 				<button type='submit' onClick={() => handleSubmitTwo()}>
 					Previous Logs
 				</button>
@@ -122,4 +139,3 @@ export default InputPage;
 //                     );
 //                 })}
 //             </section> */}
-

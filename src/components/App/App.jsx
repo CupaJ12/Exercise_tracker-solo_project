@@ -61,6 +61,13 @@ function App() {
           >
             <InputPage />
           </Route>
+          <Route
+
+            exact
+            path="/InputPage/:date"
+          >
+            <InputPage />
+          </Route>
           {/* celebration page */}
           <Route
           exact

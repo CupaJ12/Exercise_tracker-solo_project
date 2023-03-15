@@ -1,0 +1,31 @@
+.logContainer{
+    height:170px;
+    width:400px;
+    background-color: rgb(27, 100, 163);
+    border-radius: 15px;
+
+}
+.jumpingJacksContainer{
+    display: flex;
+    gap: 15px;
+
+}
+.jumpingJacksContainer p{
+    margin: 1px;
+
+}
+.dateContainer{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.buttonContainer{
+    position: absolute;
+
+}
+.titleContainer{
+    position:relative;
+    
+}

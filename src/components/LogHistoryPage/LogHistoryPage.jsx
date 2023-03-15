@@ -15,7 +15,7 @@ function LogHistory() {
 	// import exerciseReducer to get the exercise names
 	const exerciseReducer = useSelector((store) => store.exerciseReducer);
 	//
-	console.log(logArray, 'logArray');
+	
 	const dispatch = useDispatch();
 	//
 	const history = useHistory();
@@ -29,19 +29,35 @@ function LogHistory() {
 	}, []);
 	// function to run on click of the delete button
 	const handleDelete = (log) => {
-		dispatch({ type: 'DELETE_EXERCISE_LOG', payload: {id: log.id} });
+		dispatch({ type: 'DELETE_EXERCISE_LOG', payload: { id: log.id } });
 	};
 	// function to run on click of the edit button, prepopulates the input page with the already inputted info stored in the database
 
-	const handleEdit = () => {
+	const handleEdit = (log) => {
 		// dispatch({ type: 'EDIT_EXERCISE' });
-		console.log('edit button clicked');
+		console.log('log:',log);
+		console.log('555555555');
+		dispatch({ type: 'EDIT_EXERCISE_LOG', payload: { id: log.id } });
+		console.log('444444444');
+		history.push('/InputPage');
+		console.log('777-3');
+		const pushups = document.getElementsByClassName('pushups')[0];
+		console.log(document.getElementsByClassName('pushups')[0]); 
+
+		console.log('1212');
+		console.log('222222222222');
+		pushups.value = log.reps;
+		console.log('1111111111111');
+		
 	};
 	// useEffect to get the exercise names from db on page load
 	useEffect(() => {
 		dispatch({ type: 'FETCH_EXERCISES' });
 	}, []);
 	//
+	if (!logArray) {
+		return <p>loading...</p>;
+	}
 
 	return (
 		<main>
@@ -68,7 +84,7 @@ function LogHistory() {
 								<td>{log.date}</td>
 								<td>{log.reps}</td>
 								<td>
-									<button onClick={() => handleEdit()}>Edit</button>
+									<button onClick={() => handleEdit(log)}>Edit</button>
 								</td>
 								<td>
 									<button onClick={() => handleDelete(log)}>Delete</button>
@@ -83,6 +99,90 @@ function LogHistory() {
 			</div>
 			<div>
 				<button onClick={() => handleClick()}>Add new exercise</button>
+			</div>
+			<div className='logContainer'>
+				<div className='logContainerTitle'>
+					<div className='dateContainer'>
+						<p>Date</p>
+						<p>1/2/3</p>
+					</div>
+					<div className='buttonContainer'>
+					<button className='editButton'>Edit</button>
+					<button className='deleteButton'>Delete</button>
+					</div>
+				</div>
+				<div className='logContainerBody'>
+					{logArray.reps > 0 && (
+						<div>
+							<p>Pushups</p>
+							<p>{logArray.reps}</p>
+						</div>
+					)}
+					{logArray.reps > 0 && (
+						<div>
+							<p>Situps</p>
+							<p>{logArray.reps}</p>
+						</div>
+					)}
+					{logArray.reps > 0 && (
+						<div>
+							<p>Planks</p>
+							<p>{logArray.reps}</p>
+						</div>
+					)}
+					{logArray.reps > 0 && (
+						<div>
+							<p>Supermans</p>
+							<p>{logArray.reps}</p>
+						</div>
+					)}
+					{logArray.reps > 0 && (
+						<div>
+							<p>Pullups</p>
+							<p>{logArray.reps}</p>
+						</div>
+					)}
+					{true && (
+					
+						<div className='jumpingJacksContainer'>
+							<p className='exerciseName'>Jumping Jacks</p>
+							<p className='exerciseReps'>5</p>
+						</div>
+					
+					)}
+					{true && (
+					
+					<div className='jumpingJacksContainer'>
+						<p className='exerciseName'>Jumping Jacks</p>
+						<p className='exerciseReps'>5</p>
+					</div>
+				
+				)}
+				{true && (
+					
+					<div className='jumpingJacksContainer'>
+						<p className='exerciseName'>Jumping Jacks</p>
+						<p className='exerciseReps'>5</p>
+					</div>
+				
+				)}
+				{true && (
+					
+					<div className='jumpingJacksContainer'>
+						<p className='exerciseName'>Jumping Jacks</p>
+						<p className='exerciseReps'>5</p>
+					</div>
+				
+				)}
+				{true && (
+					
+					<div className='jumpingJacksContainer'>
+						<p className='exerciseName'>Jumping Jacks</p>
+						<p className='exerciseReps'>5</p>
+					</div>
+				
+				)}
+				</div>
 			</div>
 		</main>
 	);
