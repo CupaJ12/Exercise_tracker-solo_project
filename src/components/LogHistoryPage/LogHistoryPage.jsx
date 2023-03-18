@@ -6,16 +6,18 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-function LogHistory() {
+function LogHistory(props) {
 	// declare constants, import reducers etc.
 	//
 	// logArray is the array of objects that contains all the exercise logs for the user
 	const logArray = useSelector((store) => store.exerciseLogReducer);
+	console.log('logArray:', logArray);
 	//
 	// import exerciseReducer to get the exercise names
 	const exerciseReducer = useSelector((store) => store.exerciseReducer);
 	//
-	
+	const logByDate = useSelector((store) => store.logByDateReducer);
+	console.log('logByDate:', logByDate);
 	const dispatch = useDispatch();
 	//
 	const history = useHistory();
@@ -26,6 +28,8 @@ function LogHistory() {
 	//
 	useEffect(() => {
 		dispatch({ type: 'FETCH_EXERCISE_LOG' });
+		// dispatch({ type: 'SET_EXERCISE_LOG_BY_DATE' });
+		// dispatch({ type: 'FETCH_EXERCISES' });
 	}, []);
 	// function to run on click of the delete button
 	const handleDelete = (log) => {
@@ -33,28 +37,26 @@ function LogHistory() {
 	};
 	// function to run on click of the edit button, prepopulates the input page with the already inputted info stored in the database
 
-	const handleEdit = (log) => {
+	function handleEdit(log) {
 		// dispatch({ type: 'EDIT_EXERCISE' });
-		console.log('log:',log);
-		console.log('555555555');
-		dispatch({ type: 'EDIT_EXERCISE_LOG', payload: { id: log.id } });
-		console.log('444444444');
-		history.push('/InputPage');
-		console.log('777-3');
-		const pushups = document.getElementsByClassName('pushups')[0];
-		console.log(document.getElementsByClassName('pushups')[0]); 
+		// console.log('log:',log);
+		// console.log('555555555');
 
-		console.log('1212');
-		console.log('222222222222');
-		pushups.value = log.reps;
-		console.log('1111111111111');
-		
-	};
-	// useEffect to get the exercise names from db on page load
-	useEffect(() => {
-		dispatch({ type: 'FETCH_EXERCISES' });
-	}, []);
-	//
+		console.log('in handleEdit', log);
+		// dispatch({ type: 'SET_EXERCISE_LOG_BY_DATE', payload: logArray})
+		dispatch({ type: 'SET_THIS_EXERCISE_LOG', payload: log });
+		// console.log('444444444');
+		history.push('/EditPage');
+		// console.log('777-3');
+		// const pushups = document.getElementsByClassName('pushups')[0];
+		// console.log(document.getElementsByClassName('pushups')[0]);
+
+		// console.log('1212');
+		// console.log('222222222222');
+		// pushups.value = log.reps;
+		// console.log('1111111111111');
+	}
+
 	if (!logArray) {
 		return <p>loading...</p>;
 	}
@@ -62,7 +64,7 @@ function LogHistory() {
 	return (
 		<main>
 			<div>
-				<h1>Log History</h1>
+				<h1>Log History💪</h1>
 			</div>
 			<div>
 				<h3></h3>
@@ -80,35 +82,34 @@ function LogHistory() {
 					{/* grab rep count from the log table which is stored in the exerciseLog reducer imported as logArray*/}
 					{logArray.map((log) => {
 						return (
-							<tr>
-								<td>{log.date}</td>
-								<td>{log.reps}</td>
+							<section>
+								<tr key={log.date}>
+									<td>{log.date}</td>
+									<td>{log.reps}</td>
+								</tr>
 								<td>
 									<button onClick={() => handleEdit(log)}>Edit</button>
 								</td>
 								<td>
 									<button onClick={() => handleDelete(log)}>Delete</button>
 								</td>
-							</tr>
+							</section>
 						);
 					})}
 				</table>
 			</div>
 			<div>
-				<button>More</button>
-			</div>
-			<div>
 				<button onClick={() => handleClick()}>Add new exercise</button>
 			</div>
-			<div className='logContainer'>
+			{/* <div className='logContainer'>
 				<div className='logContainerTitle'>
 					<div className='dateContainer'>
 						<p>Date</p>
 						<p>1/2/3</p>
 					</div>
 					<div className='buttonContainer'>
-					<button className='editButton'>Edit</button>
-					<button className='deleteButton'>Delete</button>
+						<button className='editButton'>Edit</button>
+						<button className='deleteButton'>Delete</button>
 					</div>
 				</div>
 				<div className='logContainerBody'>
@@ -124,12 +125,12 @@ function LogHistory() {
 							<p>{logArray.reps}</p>
 						</div>
 					)}
-					{logArray.reps > 0 && (
+					{
 						<div>
 							<p>Planks</p>
 							<p>{logArray.reps}</p>
 						</div>
-					)}
+					}
 					{logArray.reps > 0 && (
 						<div>
 							<p>Supermans</p>
@@ -143,47 +144,37 @@ function LogHistory() {
 						</div>
 					)}
 					{true && (
-					
+						<div className='jumpingJacksContainer'>
+							<p className='exerciseName'>Jumping Jacks</p>
+							<p className='exerciseReps'>5🤪</p>
+						</div>
+					)}
+					{true && (
 						<div className='jumpingJacksContainer'>
 							<p className='exerciseName'>Jumping Jacks</p>
 							<p className='exerciseReps'>5</p>
 						</div>
-					
 					)}
 					{true && (
-					
-					<div className='jumpingJacksContainer'>
-						<p className='exerciseName'>Jumping Jacks</p>
-						<p className='exerciseReps'>5</p>
-					</div>
-				
-				)}
-				{true && (
-					
-					<div className='jumpingJacksContainer'>
-						<p className='exerciseName'>Jumping Jacks</p>
-						<p className='exerciseReps'>5</p>
-					</div>
-				
-				)}
-				{true && (
-					
-					<div className='jumpingJacksContainer'>
-						<p className='exerciseName'>Jumping Jacks</p>
-						<p className='exerciseReps'>5</p>
-					</div>
-				
-				)}
-				{true && (
-					
-					<div className='jumpingJacksContainer'>
-						<p className='exerciseName'>Jumping Jacks</p>
-						<p className='exerciseReps'>5</p>
-					</div>
-				
-				)}
+						<div className='jumpingJacksContainer'>
+							<p className='exerciseName'>Jumping Jacks</p>
+							<p className='exerciseReps'>5</p>
+						</div>
+					)}
+					{true && (
+						<div className='jumpingJacksContainer'>
+							<p className='exerciseName'>Jumping Jacks</p>
+							<p className='exerciseReps'>5</p>
+						</div>
+					)}
+					{true && (
+						<div className='jumpingJacksContainer'>
+							<p className='exerciseName'>Jumping Jacks</p>
+							<p className='exerciseReps'>5</p>
+						</div>
+					)}
 				</div>
-			</div>
+			</div> */}
 		</main>
 	);
 }

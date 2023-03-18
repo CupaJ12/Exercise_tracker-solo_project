@@ -48,6 +48,22 @@ router.get('/logHistory', (req, res) => {
 		});
 });
 
+//get for getting by single id
+router.get('/:id', (req, res) => {
+	let queryText = `SELECT * FROM "log"
+	  where "id" = $1;`;
+	pool
+		.query(queryText, [req.params.id])
+		.then((result) => {
+			res.send(result.rows);
+			
+		})
+		.catch((error) => {
+			console.log('Error completing SELECT exercise query', error);
+			res.sendStatus(500);
+		});
+});
+
 // post Route for exercise input from inputPage, inputs the logged exercise into the log table. connected to inputExercise saga
 
 // exerciseLog = {
@@ -66,7 +82,7 @@ router.post('/', (req, res) => {
 	let situpReps = req.body.situpReps;
 	let plankReps = req.body.plankReps;
 	let date = req.body.date;
-	
+	console.log('req.body', req.body);
 	let queryText = `INSERT INTO "log" ( "user_ID","exercise_ID", "date", "reps") VALUES ($1, 1, $2, $3), ($1, 2, $2, $4), ($1, 3, $2, $5);`;
 	// If you had more than 5 or 10 workout types, async await would be better
 	pool
@@ -80,36 +96,84 @@ router.post('/', (req, res) => {
 		});
 });
 
-router.get('/:date', (req, res) => {
-	// TODO: return array of logs by date (this should return an array of three items).
+// router.get('/:date', (req, res) => {
+// 	// TODO: return array of logs by date (this should return an array of three items).
+// });
+
+//put route for one specific id
+router.put('/:id', (req, res) => {
+	console.log('put router for one specific id', 'req.params.id:',req.params.id, 'req.body:', req.body);
+	let queryText = `UPDATE "log" SET "reps" = $2 WHERE "id" = $1;`;
+	pool
+	.query(queryText, [req.params.id, req.body.reps])
+	.then((result) => {
+		res.sendStatus(200);
+		console.log('successful put', result)
+	}
+	)
+	.catch((error) => {
+		console.log('Error completing PUT exercise query:', error);
+		res.sendStatus(500);
+	}
+	);
 });
+
+
 
 //put Route for updating exercise log history from database, connected to updateLog saga
 
-router.put('/', (req, res) => {
-	console.log('put router');
-	// TODO: Pass the following via req.body
-	// logIdPushup, logIdSitup, logIdPlank, date, pushupReps, situpReps, plankReps
+// below built with chris black
 
-	// Using an insert to allow updating multiple rows at once
-	let queryText = `
-		INSERT INTO "log" ( "id", "date", "reps")
-		VALUES ($1, $4, $5),
-			   ($2, $4, $6),
-			   ($3, $4, $7)
-		ON CONFLICT (id)
-		DO UPDATE SET date = EXCLUDED.date,
-				      reps = EXCLUDED.reps;`;
-		// id is the id of the log!
-		pool
-		.query(queryText, [logIdPushup, logIdSitup, logIdPlank, date, pushupReps, situpReps, plankReps])
-		.then((result) => {
-			res.sendStatus(201);
-		})
-		.catch((error) => {
-			console.log('Error completing POST exercise query', error);
-			res.sendStatus(500);
-		});
-})
+// router.put('/', (req, res) => {
+// 	console.log('put router');
+// 	// TODO: Pass the following via req.body
+// 	// logIdPushup, logIdSitup, logIdPlank, date, pushupReps, situpReps, plankReps
+
+// 	// Using an insert to allow updating multiple rows at once
+// 	let queryText = `
+// 		INSERT INTO "log" ( "id", "date", "reps")
+// 		VALUES ($1, $4, $5),
+// 			   ($2, $4, $6),
+// 			   ($3, $4, $7)
+// 		ON CONFLICT (id)
+// 		DO UPDATE SET date = EXCLUDED.date,
+// 				      reps = EXCLUDED.reps;`;
+// 		// id is the id of the log!
+// 		pool
+// 		.query(queryText, [logIdPushup, logIdSitup, logIdPlank, date, pushupReps, situpReps, plankReps])
+// 		.then((result) => {
+// 			res.sendStatus(201);
+// 		})
+// 		.catch((error) => {
+// 			console.log('Error completing POST exercise query', error);
+// 			res.sendStatus(500);
+// 		});
+// })
 
 module.exports = router;
+
+
+
+// example get by id
+
+// router.get('/:id', (req,res) => {
+// 	if (req.isAuthenticated()) {
+// 	  console.log('get idea id:', req.params.id);
+// 	  const id = req.params.id;
+// 	  const queryText = `
+// 	  SELECT * FROM "ideas"
+// 	  WHERE "id" = $1;`;
+// 	  pool
+// 		.query(queryText, [id])
+// 		.then(result => {
+  
+// 		  res.send(result.rows);
+// 		})
+// 		.catch((error) => {
+// 		  console.log('router.post idea error: ', error);
+// 		  res.sendStatus(500);
+// 		});
+// 	} else {
+// 	  res.sendStatus(403); // forbidden status code
+// 	}
+//   });

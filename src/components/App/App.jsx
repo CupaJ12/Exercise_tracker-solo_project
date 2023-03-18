@@ -23,7 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import InputPage from '../InputPage/InputPage';
 import CelebrationPage from '../CelebrationPage/CelebrationPage';
 import LogHistoryPage from '../LogHistoryPage/LogHistoryPage';
-
+import EditPage from '../EditPage/EditPage';
 
 
 import './App.css';
@@ -60,6 +60,14 @@ function App() {
             path="/InputPage"
           >
             <InputPage />
+          </Route>
+          {/* editpage route */}
+          <Route
+
+            exact
+            path="/EditPage"
+          >
+            <EditPage />
           </Route>
           <Route
 

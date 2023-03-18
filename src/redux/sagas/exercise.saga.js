@@ -52,13 +52,28 @@ function* deleteExercise(action) {
 // also need to connect this to the edit button on the logHistoryPage, and the submit button on the inputPage.
 
 function* editExercise(action) {
+    console.log('in editExercise, action.payload is:', action.payload);
     try {
-        yield axios.put(`/api/exercise/${action.payload.id}`, action.payload);
-        yield put({ type: 'FETCH_EXERCISE_LOG' });
+        yield axios.put(`/api/exercise/${action.payload.id}`, {reps: action.payload.reps});
+        
     } catch (error) {
         console.log('Error with edit exercise:', error);
     }
+    yield put({ type: 'FETCH_EXERCISE_LOG' });
+    
 }
+
+//function to run the route that fetches the exercise log by date
+function* fetchByDate(action) {
+    try {
+        const response = yield axios.get(`/api/exercise/${action.payload}`);
+        console.table("get by date:", response.data);
+        yield put({ type: 'SET_EXERCISE_LOG_BY_DATE', payload: response.data });
+    } catch (error) {
+        console.log('Error with fetch exercise log:', error);
+    }
+}
+
 
 
 
@@ -69,8 +84,8 @@ function* exerciseSaga() {
     yield takeLatest('INPUT_EXERCISE', inputExercise);
     yield takeLatest('DELETE_EXERCISE_LOG', deleteExercise);
     yield takeLatest('FETCH_EXERCISE_LOG', fetchExerciseLog);
-    // yield takeLatest('EDIT_EXERCISE_LOG', editExercise);
-    yield takeLatest('EDIT_EXERCISE_LOG', editExercise);
+    yield takeLatest('EDIT_THIS_EXERCISE_LOG', editExercise);
+    yield takeLatest('FETCH_BY_DATE', fetchByDate);
 }
 
 export default exerciseSaga;

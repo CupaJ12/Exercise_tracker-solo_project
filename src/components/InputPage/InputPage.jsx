@@ -18,6 +18,7 @@ function InputPage() {
 		// TODO: Reference movie saga example for edit
 		// dispatch({ type: 'FETCH_EXERCISES' });
 		//dispatch to do a get request by date, return an array of 3 exercise logs, use those to prepopulate the input fields
+		dispatch({ type: '' });
 	}, []);
 
 	
@@ -45,7 +46,7 @@ function InputPage() {
 	};
 
 	return (
-		<main className='flex-container'>
+		<main className='formPanel'>
 			<div className='flex-child inputs'>
 				{/* map through the exercise number inputs the same way i mapped through the above */}
 				<form onSubmit={handleSubmit}>
