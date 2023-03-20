@@ -17,7 +17,7 @@ function CelebrationPage() {
                 <h1>Congratulations!</h1>
             </div>
             <div>
-                <h2>You've completed X out of X workouts!</h2>
+                <h2>💪Great job on your workout!💪</h2>
             </div>
             <div>
                 <button onClick={() => handleClick()}>Log history</button>

@@ -112,9 +112,9 @@ function InputPage() {
 					Previous Logs
 				</button>
 			</div>
-			<div>
+			{/* <div>
 				<button onClick={() => handleSubmit()}>Submit</button>
-			</div>
+			</div> */}
 		</main>
 	);
 }

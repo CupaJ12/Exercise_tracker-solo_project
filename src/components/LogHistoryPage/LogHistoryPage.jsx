@@ -4,13 +4,15 @@ import './LogHistoryPage.css';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function LogHistory(props) {
 	// declare constants, import reducers etc.
 	//
 	// logArray is the array of objects that contains all the exercise logs for the user
 	const logArray = useSelector((store) => store.exerciseLogReducer);
+	const [exercise, setExercise] = useState('');
+
 	console.log('logArray:', logArray);
 	//
 	// import exerciseReducer to get the exercise names
@@ -66,34 +68,50 @@ function LogHistory(props) {
 			<div>
 				<h1>Log History💪</h1>
 			</div>
+
+			<div className='new_attempt'>
+				{logArray.map((exercise) => {
+					<div>
+					<p>{exercise}</p>
+					<p>exercise^</p>
+					</div>
+				})}
+
+
+
+			</div>
 			<div>
 				<h3></h3>
 				<table>
 					<tr>
 						<th>Date</th>
-						{exerciseReducer.map((exercise) => {
-							return <th>{exercise.name}</th>;
-						})}
 
-						<th>Edit</th>
-						<th>Delete</th>
+						<th>exercise</th>
+						<th>reps</th>
+						<th>edit</th>
+						<th>delete</th>
 					</tr>
 
 					{/* grab rep count from the log table which is stored in the exerciseLog reducer imported as logArray*/}
 					{logArray.map((log) => {
 						return (
-							<section>
+
+							
 								<tr key={log.date}>
-									<td>{log.date}</td>
-									<td>{log.reps}</td>
-								</tr>
+									<td>{log.date.slice(0,10)}</td>
+									
+									
+									{log.exercise_ID == 1 && <td>Pushups:</td>}
+									{log.exercise_ID == 2 && <td>Situps:</td>}
+									{log.exercise_ID == 3 && <td>Planks:</td>}
+								<td>{log.reps}</td>
 								<td>
 									<button onClick={() => handleEdit(log)}>Edit</button>
 								</td>
 								<td>
 									<button onClick={() => handleDelete(log)}>Delete</button>
-								</td>
-							</section>
+								</td></tr>
+							
 						);
 					})}
 				</table>
