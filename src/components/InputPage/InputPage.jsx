@@ -21,7 +21,6 @@ function InputPage() {
 		dispatch({ type: '' });
 	}, []);
 
-	
 	// declare constants, import reducers etc.
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -36,12 +35,12 @@ function InputPage() {
 			situpReps: situps,
 			plankReps: planks,
 			date,
-		}
+		};
 		dispatch({
 			type: 'INPUT_EXERCISE',
 			payload: exerciseLog,
 		});
-	
+
 		history.push('/CelebrationPage');
 	};
 
@@ -50,38 +49,38 @@ function InputPage() {
 			<div className='flex-child inputs'>
 				{/* map through the exercise number inputs the same way i mapped through the above */}
 				<form onSubmit={handleSubmit}>
-				{/* pushups */}
-				<div className='numInput-container'>
-								<label>pushups</label>
-								<input
-									type='number'
-									className='pushups'
-									onChange={(e) => setPushups(e.target.value)}
-								/>
-								<br></br>
-							</div>
-							{/* situps */}
-							<div className='numInput-container'>
-								<label>situps</label>
-								<input
-									type='number'
-									className='situps'
-									onChange={(e) => setSitups(e.target.value)}
-								/>
-								<br></br>
-							</div>
-							{/* planks */}
-							<div  className='numInput-container'>
-								<label>planks</label>
-								<input
-									type='number'
-									className='planks'
-									onChange={(e) => setPlanks(e.target.value)}
-								/>
-								<br></br>
-							</div>
-							<button type='submit' >Submit!</button>
-							</form>
+					{/* pushups */}
+					<div className='numInput-container'>
+						<label>pushups</label>
+						<input
+							type='number'
+							className='pushups'
+							onChange={(e) => setPushups(e.target.value)}
+						/>
+						<br></br>
+					</div>
+					{/* situps */}
+					<div className='numInput-container'>
+						<label>situps</label>
+						<input
+							type='number'
+							className='situps'
+							onChange={(e) => setSitups(e.target.value)}
+						/>
+						<br></br>
+					</div>
+					{/* planks */}
+					<div className='numInput-container'>
+						<label>planks</label>
+						<input
+							type='number'
+							className='planks'
+							onChange={(e) => setPlanks(e.target.value)}
+						/>
+						<br></br>
+					</div>
+					<button type='submit'>Submit!</button>
+				</form>
 				{/* {getExercisesReducer.map((item, index) => {
 					return (
 						<form onSubmit={(e) => formSubmit()}>
@@ -106,7 +105,11 @@ function InputPage() {
 				})} */}
 
 				<label>Date</label>
-				<input type='date' className='date' onChange= {(e) => setDate(e.target.value)}/>
+				<input
+					type='date'
+					className='date'
+					onChange={(e) => setDate(e.target.value)}
+				/>
 				{/* make type date^ */}
 				<button type='submit' onClick={() => handleSubmitTwo()}>
 					Previous Logs

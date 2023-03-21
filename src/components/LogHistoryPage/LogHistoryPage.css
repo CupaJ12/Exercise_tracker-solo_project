@@ -1,37 +1,48 @@
-.logContainer{
-    height:170px;
-    width:400px;
-    background-color: rgb(27, 100, 163);
-    border-radius: 15px;
-
+.logContainer {
+	height: 170px;
+	width: 400px;
+	background-color: rgb(27, 100, 163);
+	border-radius: 15px;
 }
-.jumpingJacksContainer{
+.jumpingJacksContainer {
+	display: flex;
+	gap: 15px;
+}
+.jumpingJacksContainer p {
+	margin: 1px;
+}
+.dateContainer {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+}
+.buttonContainer {
+	position: absolute;
+}
+.titleContainer {
+	position: relative;
+}
+td,
+th {
+	text-align: left;
+	padding: 8px;
+	border: 1px solid white;
+}
+.main{
+    margin-right:400px;
+    margin-left: 400px;
+    text-align: center;
+    background-color: rgb(3, 78, 53);
     display: flex;
-    gap: 15px;
-
-}
-.jumpingJacksContainer p{
-    margin: 1px;
-
-}
-.dateContainer{
-    display: flex;
-    width: 100%;
     justify-content: center;
-    align-items: center;
-    gap: 15px;
+    flex-direction: column;
+    border-radius: 15px;
+    padding-bottom: 15px;
 }
-.buttonContainer{
-    position: absolute;
+table{
+    text-align: center;
+    margin: auto;
 
-}
-.titleContainer{
-    position:relative;
-    
-}
-td,th{
-    text-align:left;
-    padding: 8px;
-    border: 1px solid black;
-    
 }

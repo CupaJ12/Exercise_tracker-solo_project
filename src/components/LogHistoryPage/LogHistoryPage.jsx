@@ -64,7 +64,7 @@ function LogHistory(props) {
 	}
 
 	return (
-		<main>
+		<main className='main'>
 			<div>
 				<h1>Log History💪</h1>
 			</div>
@@ -72,16 +72,12 @@ function LogHistory(props) {
 			<div className='new_attempt'>
 				{logArray.map((exercise) => {
 					<div>
-					<p>{exercise}</p>
-					<p>exercise^</p>
-					</div>
+						<p>{exercise}</p>
+						<p>exercise^</p>
+					</div>;
 				})}
-
-
-
 			</div>
 			<div>
-				<h3></h3>
 				<table>
 					<tr>
 						<th>Date</th>
@@ -95,23 +91,20 @@ function LogHistory(props) {
 					{/* grab rep count from the log table which is stored in the exerciseLog reducer imported as logArray*/}
 					{logArray.map((log) => {
 						return (
+							<tr key={log.date}>
+								<td>{log.date.slice(0, 10)}</td>
 
-							
-								<tr key={log.date}>
-									<td>{log.date.slice(0,10)}</td>
-									
-									
-									{log.exercise_ID == 1 && <td>Pushups:</td>}
-									{log.exercise_ID == 2 && <td>Situps:</td>}
-									{log.exercise_ID == 3 && <td>Planks:</td>}
+								{log.exercise_ID == 1 && <td>Pushups:</td>}
+								{log.exercise_ID == 2 && <td>Situps:</td>}
+								{log.exercise_ID == 3 && <td>Planks:</td>}
 								<td>{log.reps}</td>
 								<td>
 									<button onClick={() => handleEdit(log)}>Edit</button>
 								</td>
 								<td>
 									<button onClick={() => handleDelete(log)}>Delete</button>
-								</td></tr>
-							
+								</td>
+							</tr>
 						);
 					})}
 				</table>

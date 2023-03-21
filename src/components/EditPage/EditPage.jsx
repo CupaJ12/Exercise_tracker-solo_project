@@ -5,25 +5,24 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 function EditPage() {
-    
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const thisLog = useSelector((store) => store.thisExerciseLogReducer);
 	console.log('thisLog:', thisLog);
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('in handleSubmit', thisLog);
-        dispatch({ type: 'EDIT_THIS_EXERCISE_LOG', payload: thisLog });
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		console.log('in handleSubmit', thisLog);
+		dispatch({ type: 'EDIT_THIS_EXERCISE_LOG', payload: thisLog });
 
-
-        history.push('/LogHistoryPage');
-
-    }
-    const changeReps = (e) => {
-     console.log('updated reps:', e.target.value);
-     dispatch({ type: 'EDIT_REPS_ONCHANGE', payload: {property: 'reps', value: e.target.value} });
-
-    }
+		history.push('/LogHistoryPage');
+	};
+	const changeReps = (e) => {
+		console.log('updated reps:', e.target.value);
+		dispatch({
+			type: 'EDIT_REPS_ONCHANGE',
+			payload: { property: 'reps', value: e.target.value },
+		});
+	};
 
 	return (
 		<main className='flex-container'>
@@ -34,7 +33,7 @@ function EditPage() {
 					<div className='numInput-container'>
 						<label>Reps:</label>
 						<input
-                            defaultValue={thisLog.reps}
+							defaultValue={thisLog.reps}
 							type='number'
 							className='exercise'
 							onChange={(e) => changeReps(e)}
