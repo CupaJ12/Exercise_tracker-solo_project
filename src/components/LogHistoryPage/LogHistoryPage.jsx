@@ -82,10 +82,10 @@ function LogHistory(props) {
 					<tr>
 						<th>Date</th>
 
-						<th>exercise</th>
-						<th>reps</th>
-						<th>edit</th>
-						<th>delete</th>
+						<th>Exercise</th>
+						<th>Reps</th>
+						<th>Edit</th>
+						<th>Delete</th>
 					</tr>
 
 					{/* grab rep count from the log table which is stored in the exerciseLog reducer imported as logArray*/}

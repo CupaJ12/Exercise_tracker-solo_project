@@ -51,7 +51,7 @@ function InputPage() {
 				<form onSubmit={handleSubmit}>
 					{/* pushups */}
 					<div className='numInput-container'>
-						<label>pushups</label>
+						<label>Pushups</label>
 						<input
 							type='number'
 							className='pushups'
@@ -61,7 +61,7 @@ function InputPage() {
 					</div>
 					{/* situps */}
 					<div className='numInput-container'>
-						<label>situps</label>
+						<label>Situps</label>
 						<input
 							type='number'
 							className='situps'
@@ -71,7 +71,7 @@ function InputPage() {
 					</div>
 					{/* planks */}
 					<div className='numInput-container'>
-						<label>planks</label>
+						<label>Planks</label>
 						<input
 							type='number'
 							className='planks'
